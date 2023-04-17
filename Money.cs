@@ -11,12 +11,12 @@
             return new Money(Amount / rate, to);
         }
 
-        public Expression Plus(Money addend)
+        public Expression Plus(Expression addend)
         {
             return new Sum(this, addend);
-        }
+        }        
 
-        public Money Times(int multiplier)
+        public Expression Times(int multiplier)
         {
             return new Money(Amount * multiplier, Currency);
         }

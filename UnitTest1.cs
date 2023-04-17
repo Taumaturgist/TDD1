@@ -8,7 +8,21 @@ namespace NUnitLearningProject
         [SetUp]
         public void Setup()
         {
-        }        
+        }    
+        
+        [Test]
+        public void TestMixedAddition()
+        {
+            Expression fiveBucks = Money.Dollar(5);
+            Expression tenFrancs = Money.Franc(10);
+            Bank bank = new Bank();
+            bank.AddRate("CHF", "USD", 2);
+            Money result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
+            Assert.AreEqual(
+                JsonConvert.SerializeObject(Money.Dollar(10)),
+                JsonConvert.SerializeObject(result)
+                );
+        }
 
         [Test]
         public void TestIdentityRate()
@@ -51,7 +65,6 @@ namespace NUnitLearningProject
                 JsonConvert.SerializeObject(Money.Dollar(7)),
                 JsonConvert.SerializeObject(result)
                 );
-
         }
 
         [Test]

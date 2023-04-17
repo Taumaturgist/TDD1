@@ -2,19 +2,24 @@
 {
     public class Sum : Expression
     {
-        public Money Augend;
-        public Money Addend;
+        public Expression Augend;
+        public Expression Addend;
 
-        public Sum(Money augend, Money addend)
+        public Sum(Expression augend, Expression addend)
         {
-            this.Augend = augend;
-            this.Addend = addend;
+            Augend = augend;
+            Addend = addend;
         }
 
         public Money Reduce(Bank bank, string to)
         {
-            int amount = Augend.Amount + Addend.Amount;
+            int amount = Augend.Reduce(bank, to).Amount + Addend.Reduce(bank, to).Amount;
             return new Money(amount, to);
+        }
+
+        public Expression Plus(Expression addend)
+        {
+            return null;
         }
     }
 }
